@@ -1,0 +1,286 @@
+<% layout("/layouts/boilerplate") %>
+  <%- include('../partials/flash.ejs') %>
+
+
+    <style>
+      .cards {
+        border: none !important;
+        margin-bottom: 2rem;
+      }
+
+      .card-img-top {
+        border-radius: 1rem !important;
+        width: 100% !important;
+        object-fit: cover !important;
+        height: 20rem;
+      }
+
+      .card-body {
+        padding: 0 !important;
+      }
+
+      .card-text {
+        font-weight: 400 !important;
+      }
+
+      .listing-link {
+        text-decoration: none;
+      }
+
+      .card-img-overlay:hover {
+        opacity: 0.2;
+        background-color: white;
+      }
+
+      #filters {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+
+      }
+
+      .filter {
+        text-align: center;
+        margin-right: 2rem;
+        margin-top: 1rem;
+        margin-bottom: -0.5rem;
+        opacity: 0.6;
+      }
+
+      .filter:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+
+      .tax-info {
+        display: none;
+      }
+
+      .tax-toggle {
+        border: 1px solid black;
+        border-radius: 1rem;
+        height: 3.2rem;
+        padding: 1rem;
+
+        display: flex;
+        align-items: center;
+      }
+
+
+
+
+      /* Large screens: horizontal layout */
+      @media (min-width: 768px) {
+
+        /* md and above */
+        #navbarToggleExternalContent {
+          display: flex !important;
+          /* always visible */
+          flex-wrap: wrap;
+        }
+
+        .filter {
+          margin-right: 2rem;
+          margin-top: 1rem;
+        }
+      }
+
+      /* Small screens: vertical layout when collapsed */
+      @media (max-width: 767.98px) {
+        #navbarToggleExternalContent {
+          flex-direction: column;
+        }
+
+        .filter {
+          margin: 0.5rem 0;
+        }
+      }
+
+      *
+
+      /* Filter tax toggel
+
+
+/* Base styles */
+      .tax-toggle {
+        display: flex;
+        align-items: center;
+        width: 25vh;
+
+
+      }
+
+      /* Small screens (sm and below) */
+      @media (max-width: 767.98px) {
+        .tax-toggle {
+          margin-left: 0.5rem;
+          /* reduce spacing */
+          margin-top: 0.5rem;
+          font-size: 0.8rem;
+          /* scale down text */
+          transform: scale(.8);
+          /* shrink entire div */
+          transform-origin: left center;
+          /* scale from left side */
+        }
+
+        /* Optional: make it appear next to the filter button */
+        .tax-toggle-container {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          flex-wrap: nowrap;
+        }
+      }
+
+      @media(max-width:770px) {
+        #tgl {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+        }
+      }
+
+      #tgl {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    </style>
+
+
+
+    <!-- Filter toggle button for small screens only -->
+
+
+    <div id="filters" class="pos-f-t">
+
+
+      <div class="collapse d-md-flex" id="navbarToggleExternalContent">
+        <div class="filter">
+          <div><i class="fa-solid fa-fire"></i></div>
+          <p>Trending</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-bed"></i></div>
+          <p>Rooms</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-mountain-city"></i></div>
+          <p>Iconic Cities</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-umbrella-beach"></i></div>
+          <p>Beach</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-person-swimming"></i></div>
+          <p>Amazing Pools</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-campground"></i></div>
+          <p>Camping</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-tractor"></i></div>
+          <p>Farms</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-snowflake"></i></div>
+          <p>Arctics</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-hill-rockslide"></i></div>
+          <p>Hills</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-igloo"></i></div>
+          <p>Domes</p>
+        </div>
+        <div class="filter">
+          <div><i class="fa-solid fa-ship"></i></div>
+          <p>Boat</p>
+        </div>
+      </div>
+
+
+
+      <div id="tgl">
+
+
+
+        <button class="btn btn-outline-secondary d-md-none mb-2" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+          aria-expanded="false" aria-label="Toggle filters">
+          <span class="navbar-toggler-icon"></span> Filters
+        </button>
+
+
+
+        <div class="tax-toggle">
+          <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+            <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+          </div>
+        </div>
+
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-3 mt-3">
+      <% for (let listing of allListings ){ %>
+        <div class="col">
+          <a href="/listing/<%= listing.id %>" class="listing-link">
+            <div class="card h-100 listing-card" style="width: 100%;">
+              <img
+                src="<%= listing.image && listing.image.url ? listing.image.url : listing.image ? listing.image : '' %>"
+                class="card-img-top" alt="listing-image" />
+              <div class="card-img-overlay"></div>
+              <div class="card-body">
+                <p class="card-text">
+                  <b>
+                    <%= listing.title %>
+                  </b> <br>
+                  &#8377
+                  <%= listing.price !=null ? listing.price.toLocaleString("en-IN") : "N/A" %>/Night
+                    <i class="tax-info">
+                      &nbsp; +18% taxes =
+                      <%= (listing.price * 1.18).toFixed(2) %>
+                    </i>
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <% } %>
+    </div>
+
+
+    <script>
+      // Make sure you select the element correctly
+      let taxSwitch = document.getElementById("switchCheckDefault");
+
+      // Check if the element exists to avoid errors
+
+      taxSwitch.addEventListener("click", () => {
+        let taxInfo = document.getElementsByClassName("tax-info")
+        for (info of taxInfo) {
+          if (info.style.display != "inline") {
+            info.style.display = "inline"
+          } else {
+            info.style.display = "none"
+          }
+
+        }
+      });
+
+    </script>

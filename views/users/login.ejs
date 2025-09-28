@@ -1,0 +1,42 @@
+<% layout("/layouts/boilerplate") %>
+<%- include('../partials/flash.ejs') %>
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <h1>Login to Wanderlust</h1>
+        <form novalidate class="needs-validation" action="/login" method="POST">
+
+            <div class="col-md-12">
+                <label class="form-label" for="username">Username</label>
+                <input 
+                    name="username"
+                    class="form-control" 
+                    id="username" 
+                    placeholder="Enter username" 
+                    required
+                    type="text">
+                
+            
+            </div>
+
+            <div class="col-md-12 mt-3">
+                <label class="form-label" for="password">Password</label>
+                <input 
+                    name="password"
+                    class="form-control" 
+                    id="password" 
+                    placeholder="Enter password" 
+                    required
+                    type="password">
+                <div class="invalid-feedback">
+                    Please enter your password.
+                </div>
+            </div>
+
+            <div class="col-md-12 mt-4">
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </div>
+
+        </form>
+    </div>
+</div>

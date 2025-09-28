@@ -1,0 +1,91 @@
+<style>
+    
+/* footer.css */
+
+footer {
+    background-color: #222;
+    color: #f1f1f1;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: Arial, sans-serif;
+    
+    
+}
+
+/* Social icons */
+.f-info-socials {
+    display: flex;
+    gap: 15px;
+    font-size: 20px;
+}
+
+.f-info-socials i {
+    width:100%;
+    color: #f1f1f1;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.f-info-socials i:hover {
+    color: #ff9800; /* Accent color on hover */
+    transform: scale(1.2);
+}
+
+/* Links */
+.f-info-links {
+    display: flex;
+    gap: 15px;
+}
+
+.f-info-links a {
+    color: #f1f1f1;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.f-info-links a:hover {
+    color: #ff9800;
+}
+
+/* Company text */
+footer > div:nth-child(2) {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .f-info-socials,
+    .f-info-links {
+        justify-content: center;
+    }
+}
+ 
+</style>
+<footer >
+    <div class="f-info ">
+        <div class="f-info-socials">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-linkedin"></i>
+
+        </div>
+    </div>
+    <div class=""> &copy; WanderLust Private Limited</div>
+    <div class="f-info-links">
+        <a href="/privacy">Privacy</a>
+        <a href="terms">Terms</a>
+    </div>
+
+</footer>

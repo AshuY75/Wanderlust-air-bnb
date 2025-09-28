@@ -1,0 +1,121 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+  /* ==============================
+   Container for all cards
+   ============================== */
+.cards-container {
+  display: flex;              /* flex layout for cards */
+  flex-wrap: wrap;            /* allow wrapping on smaller screens */
+  gap: 1rem;                  /* space between cards */
+  justify-content: center;    /* center cards horizontally */
+}
+
+/* ==============================
+   Individual Card Styling
+   ============================== */
+.card {
+  width: 18rem;               /* default width (matching your inline style) */
+  max-width: 100%;            /* never exceed container width */
+  height: 400px;              /* fixed height for uniformity */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;           /* crop overflow content */
+  border: 1px solid #ddd;     /* optional border */
+  border-radius: 8px;         /* rounded corners */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* subtle shadow */
+  transition: transform 0.3s, box-shadow 0.3s; /* smooth hover effect */
+}
+
+/* ==============================
+   Hover Effect for Card
+   ============================== */
+.card:hover {
+  transform: translateY(-5px);  /* lift card on hover */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* ==============================
+   Card Image Styling
+   ============================== */
+.card img {
+  width: 100%;                /* full card width */
+  height: 150px;              /* fixed height for uniformity */
+  object-fit: cover;          /* crop image without stretching */
+}
+
+/* ==============================
+   Card Body Styling
+   ============================== */
+.card-body {
+  flex: 1;                     /* fill remaining space */
+  overflow: hidden;            /* prevent content overflow */
+  padding: 0.75rem;            /* space inside card body */
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;     /* show ... if text is long */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;       /* limit description to 4 lines */
+  -webkit-box-orient: vertical;
+}
+
+/* ==============================
+   Responsive Breakpoints
+   ============================== */
+
+/* Large screens (desktops) */
+@media (max-width: 1200px) {
+  .card { width: 16rem; height: 380px; }
+}
+
+/* Medium screens (smaller desktops / tablets) */
+@media (max-width: 992px) {
+  .card { width: 14rem; height: 360px; }
+}
+
+/* Small screens (tablets / portrait) */
+@media (max-width: 768px) {
+  .card { width: 45%; height: 350px; } /* 2 cards per row */
+}
+
+/* Extra small screens (mobiles) */
+@media (max-width: 576px) {
+  .card { width: 100%; height: auto; } /* 1 card per row */
+  .card img { height: 200px; }        /* taller image for small screens */
+}
+.clickable-card {
+   text-decoration: none;
+   color: black;
+}
+</style>
+
+<h2>Search results for "<%= q %>"</h2>
+
+<% if (results.length > 0) { %>
+  <div class="cards-container" style="display: flex; flex-wrap: wrap; gap: 1rem;">
+    <% results.forEach(item => { %>
+      <a class="clickable-card" href="/listing/<%= item.id %>">
+      <div  class="card" style="width: 18rem;">
+        <% if(item.image) { %>
+          <img src="<%= item.image.url %>" class="card-img-top" alt="<%= item.title %>">
+        <% } %>
+        <div class="card-body">
+          <h5 class="card-title"><%= item.title %></h5>
+          <p class="card-text"><%= item.description %></p>
+          <a href="/listing/<%= item.id %>" class="btn btn-primary">View</a>
+        </div>
+      </div>
+      </a>
+    <% }) %>
+  </div>
+<% } else { %>
+  <p>No results found for "<%= q %>"</p>
+<% } %>
